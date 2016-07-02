@@ -1,0 +1,62 @@
+
+<link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../cs-toolbar/cd-toolbar.html">
+
+<dom-module id="cd-sidebar">
+
+    <template>
+        <style>
+
+            app-drawer {
+                --app-drawer-width: 250px;
+                --app-drawer-content-container: {
+                    background-color: #B0BEC5;
+                }
+            }
+        </style>
+        <app-drawer-layout responsive-width="400px" narrow="{{narrow}}">
+            <app-drawer>
+
+            </app-drawer>
+            <cd-toolbar is-sidebar-open="{{isSidebarOpen}}" collapsed="{{narrow}}"></cd-toolbar>
+        </app-drawer-layout>
+
+
+    </template>
+</dom-module>
+
+<script>
+
+    Polymer({
+        is: 'cd-sidebar',
+
+        properties:{
+
+            narrow:{
+                type:Boolean,
+                notify:true,
+                reflectToAttribute: true
+
+            },
+
+            isSidebarOpen:{
+                type:Boolean,
+                reflectToAttribute: true,
+                observer:'_toggleSideBar'
+            }
+        },
+
+        _toggleSideBar:function(value){
+
+            var app_drawer =  this.$$('app-drawer');
+            if(value){
+                app_drawer.open();
+                this.isSidebarOpen = false;
+
+            }
+        }
+
+
+    })
+</script>

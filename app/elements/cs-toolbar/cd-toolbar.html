@@ -1,0 +1,75 @@
+
+
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+
+
+<dom-module id="cd-toolbar">
+    <style>
+        
+        /*@media (min-width: 401px) {*/
+            /*app-header-layout{*/
+                /*display: none;*/
+            /*}*/
+        /*}*/
+        
+        app-toolbar{
+            background-color: skyblue;
+
+        }
+    </style>
+
+<template>
+        <app-header-layout >
+            <app-header>
+                <app-toolbar>
+                    <paper-icon-button on-tap="toggleSidebar" icon="icons:view-headline"></paper-icon-button>
+                </app-toolbar>
+            </app-header>
+        </app-header-layout>
+    </template>
+</dom-module>
+
+<script>
+
+    Polymer({
+        is: 'cd-toolbar',
+
+        properties:{
+
+            collapsed:{
+                type:Boolean,
+                reflectToAttribute: true,
+                observer: '_collapseToolBar'
+
+            },
+
+            isSidebarOpen:{
+                type:Boolean,
+                notify:true,
+                reflectToAttribute: true
+            }
+        },
+
+        _collapseToolBar: function(value){
+
+            var app_header_layout = this.$$('app-header-layout');
+            if(value){
+                app_header_layout.style.display='';
+            }else{
+                app_header_layout.style.display='none';
+            }
+        },
+
+        toggleSidebar: function(){
+            this.isSidebarOpen = !this.isSidebarOpen;
+        }
+
+
+
+    })
+</script>
